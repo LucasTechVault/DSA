@@ -10,6 +10,59 @@
     - push openers onto stack
     - pop from stack if closer and compare
 
+### A1. Valid Parenthesis
+**Problem:**
+You are given a string s consisting of the following characters: '(', ')', '{', '}', '[' and ']'.
+
+The input string s is valid if and only if:
+
+Every open bracket is closed by the same type of close bracket.
+Open brackets are closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+Return true if s is a valid string, and false otherwise.
+
+**Example:**
+```
+Input: s = "[]"
+Output: true
+```
+**Strategy:**
+```
+1. init bracket mapping ->
+    - Key: Open brackets
+    - Val: Close brackets
+2. iterate through each char in string
+    - if open brackets -> append to stack
+    - if close brackets ->
+        - if empty stack, return False
+        - else pop -> check if bracketmapping[open_bracket] == close_bracket
+            - No -> return False 
+```
+**Code:**
+```
+    def isValid(self, s: str) -> bool:
+        bracket_mapping = {
+            '(': ')',
+            '{': '}',
+            '[': ']'
+        }
+        
+        st = []
+        for c in s:
+            if c in bracket_mapping:
+                st.append(c)
+            
+            else:
+                if not st:
+                    return False
+
+                last_open_bracket = st.pop()
+                if bracket_mapping[last_open_bracket] != c:
+                    return False
+            
+        return len(st) == 0
+```
+
 ### B Monotonic Stack (next greater element)
     - "Nobody smaller than me can stand behind me"
     - pop elements off stack until rule satisfied, then push current element
@@ -113,4 +166,5 @@ def calPoints(self, operations: List[str]) -> int:
     
     return sum(s)
 ```
+
 
