@@ -143,6 +143,23 @@ def sortArrayByParity(self, nums: List[int]) -> List[int]:
             r -= 1
     return nums
 ```
+### A5. Valid Palindrome 2
+**Problem:**
+You are given a string s, return true if the s can be a palindrome after deleting at most one character from it.
+
+A palindrome is a string that reads the same forward and backward.
+
+Note: Alphanumeric characters consist of letters (A-Z, a-z) and numbers (0-9).
+
+**Example:**
+```
+Input: s = "aca"
+Output: true
+```
+
+**Strategy:**
+```
+```
 
 ## B. Hare & Tortoise (Fast Slow)
 

@@ -10,7 +10,6 @@ You are given an integer n representing the number of steps to reach the top of 
 Return the number of distinct ways to climb to the top of the staircase.
 
 **Example:**
-
 ```
 Input: n = 3
 Output: 3
@@ -20,7 +19,6 @@ Output: 3
 ```
 
 **Strategy:**
-
 ```
 1. Identify recurrence
     - if standing at step N
@@ -50,7 +48,6 @@ def climbStairs(self, n: int) -> int:
 ```
 
 **Space Optimize:**
-
 ```
 - Recurrence only depend on 2 past variables
 - store initial variables as cur and pre & update per iteration

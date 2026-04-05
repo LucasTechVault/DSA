@@ -155,6 +155,78 @@ Output: 15
     - max(standard_kadane, chopped middle)
 ```
 
+### A4. Longest Turbulent Subarray
+**Problem:**
+You are given an integer array arr, return the length of a maximum size turbulent subarray of arr.
+
+A subarray is turbulent if the comparison sign flips between each adjacent pair of elements in the subarray.
+
+More formally, a subarray [arr[i], arr[i + 1], ..., arr[j]] of arr is said to be turbulent if and only if:
+
+For i <= k < j:
+arr[k] > arr[k + 1] when k is odd, and
+arr[k] < arr[k + 1] when k is even.
+Or, for i <= k < j:
+arr[k] > arr[k + 1] when k is even, and
+arr[k] < arr[k + 1] when k is odd.
+**Example:**
+```
+Input: arr = [2,4,3,2,2,5,1,4]
+Output: 4
+```
+**Strategy:**
+```
+1. set n = len(arr) -> perform len(1) check -> return 1
+2. init:
+    - cur_len, max_len
+    - previous_slope = 0 (initially flat)
+3. iterate i from 1 to n
+    - 3.1) find cur_slope:
+        - arr[i] > arr[i-1] -> cur_slope = 1
+        - arr[i] < arr[i-1] -> cur_slope = -1
+        - else cur_slope = 0
+    - 3.2) Update cur_len
+        - if cur_slope == 0 -> reset cur_len = 1
+        - if cur_slope == -previous_slope -> cur_len += 1 (valid)
+        - else -> repeated slope -> cur_len = 2 (repeat values considered start for next seq)
+    - 3.3) compare max_len = max(max_len, cur_len)
+4) return max_len
+```
+**Code:**
+```
+def maxTurbulenceSize(self, arr: List[int]) -> int:
+    n = len(arr)
+    if n == 1:
+        return 1
+    
+    cur_len, max_len = 1, 1
+    previous_slope = 0
+
+    for i in range(1, n):
+        # 1. calc slope
+        if arr[i] < arr[i-1]:
+            cur_slope = -1
+        elif arr[i] > arr[i-1]:
+            cur_slope = 1
+        else:
+            cur_slope = 0
+
+        # 2. update cur_len
+        if cur_slope == 0:
+            cur_len = 1
+        elif cur_slope == -previous_slope:
+            cur_len += 1
+        else:
+            cur_len = 2
+        
+        # 3. update max_len
+        max_len = max(max_len, cur_len)
+        previous_slope = cur_slope
+        
+    return max_len
+```
+
+
 ### Pattern B - Reach (Intervals & Jumps)
 **Intuition:** Have elastic band, want to see how far it can stretch before needing to let go and move to next anchor point
 
