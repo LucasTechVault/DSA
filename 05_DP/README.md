@@ -62,3 +62,33 @@ for r in range(1, ROWS):
 * Triangle
 * Maximal Square
 * Minimum Falling Path Sum
+
+
+## Pattern 3: State Machine DP (Multi-State Linear)
+
+**Key Idea:**
+At any step i, can be in 1 of K mutually exclusive states.
+Moving to step i+1 might change state
+
+**Intuition:**
+* Imagine driving manual car. At any second, either in gear 1, 2 or Neutral.
+* Speed at i depends on which gear
+
+**Implementation Blueprint:**
+```
+hold = [-infinity] * n
+empty = [0] * n
+
+for i in range(1, n):
+    hold[i] = max(hold[i-1], empty[i-1] - price[i]) # keep holding or buy today
+    empty[i] = max(empty[i-1], hold[i-1] + price[i]) # keep empty or sell today
+```
+
+**Leetcode Qns:**
+* Best Time to Buy and Sell Stock
+* Best Time to Buy and Sell Stock II
+* Best Time to Buy and Sell Stock Cooldown
+* Best Time to Buy and Sell Stock with Transaction Fee
+* Paint House
+* Paint Fence
+* Wiggle Subsequence
