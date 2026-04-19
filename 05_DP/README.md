@@ -148,3 +148,37 @@ for i iin range(1, len(text1) + 1):
 * Delete Operation for Two Strings
 * Maximum Length of Repeated Subarray
 * Longest Common Subsequence 
+
+## Pattern 6: Interval DP (Palindromes & Partitions)
+**Key Idea:**
+To solve for range (i, j), must first solve for inner ranges (i+1, j-1)
+
+**Intuition:**
+* imagine a Russian nesting doll, cannot solve outer shell if inner shell not solved.
+* start by evaluating length 1 --> then 2, then 3
+* By the time [0, n-1], have evaluated inner core
+
+**Implementation Blueprint:**
+```
+dp = [[False] * n for _ in range(n)]
+
+for length in range(1, n+1):
+    for i in range(n - length + 1):
+        j = i + length - 1
+        
+        if length == 1:
+            dp[i][j] = True
+        
+        elif length == 2:
+            dp[i][j] = (s[i] == s[j])
+        
+        else:
+            dp[i][j] = (s[i] == s[j]) and dp[i+1][j-1]
+```
+
+**Leetcode Qns:**
+* Longest Palindromic Substring
+* Longest Palindromic Subsequence
+* Palindromic Substrings
+* Guess Number Higher or Lower II
+* Palindrome Partitioning
