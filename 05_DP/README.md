@@ -92,3 +92,59 @@ for i in range(1, n):
 * Paint House
 * Paint Fence
 * Wiggle Subsequence
+
+## Pattern 4: Knapsack DP (Combinatorics & Subsets)
+**Key Idea:**
+Given limited capacity and must choose from pool of items to min-max
+
+**Intuition:**
+* Thief with backpack that holds exactly W pounds
+* For every items, ask -> keep or take?
+* If take, capacity shrink but value increases
+
+**Implementation Blueprint:**
+```
+dp = [0] * (CAPACITY + 1)
+
+for weight, value in items:
+    for w in range(CAPACITY, weight - 1, -1):
+        dp[w] = max(dp[w], dp[w - weight] + value)
+```
+
+**Leetcode Qns:**
+* Partition Equal Subset Sum (0/1 Knapsack) -> 0/1 binary choice
+* Target Sum (01 Knapsack)
+* Coin Change (Unbounded Knapsack)
+* Coin Change II (Unbounded)
+* Perfect Squares
+
+## Pattern 5: String / Subsequence DP (LCS & LIS)
+**Key Idea:**
+Used when comparing 2 arrays / strings or finding Longest continuous / discontinuous sequence within an array
+
+**Intuition:**
+* Imagine given 2 strings Word A & B
+* Setup Matrix where word A is columns and B is rows
+* check char by char, if match, move idx i / j as required
+    * i -> rows -> word B
+    * j -> cols -> word A
+
+**Implementation Blueprint:**
+```
+dp = [[0] * (len(text2) + 1) for _ in range(len(text1) + 1)]
+
+for i iin range(1, len(text1) + 1):
+    for j in range(1, len(text2) + 1):
+        if text1[i-1] == text2[j-1]:
+            dp[i][j] = 1 + dp[i-1][j-1]
+        else:
+            dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+```
+
+**Leetcode Qns:
+* Longest Increasing Subsequence (1D)
+* Edit Distance (2D)
+* Interleaving String (2D)
+* Delete Operation for Two Strings
+* Maximum Length of Repeated Subarray
+* Longest Common Subsequence 
